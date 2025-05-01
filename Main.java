@@ -1,5 +1,3 @@
-package FirstYr_SecondSem_Midterm_PracticalExam;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
