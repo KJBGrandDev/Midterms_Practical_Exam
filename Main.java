@@ -35,7 +35,8 @@ public class Main {
         for(int i: studentGrades.values()){
             avgGrade += i;
         }
-
+        //Automatic "Average Grade" Printer
+        //Will replace the previous "Average Grade" if there's any changes inside the file
         try(PrintWriter writer = new PrintWriter(new FileWriter(fileName,true))){
             writer.printf("\nAverage %.2f",(avgGrade/studentGrades.size()));
         } catch (Exception e){
@@ -62,7 +63,8 @@ public class Main {
         } catch(Exception e){
             System.out.println("Error: " + e);
         }
-
+        //Will rewrite the text files in preparation for writing the new Average Grade inside the File
+        //Will use the stored Students Name and Grades inside the LinkedHashMap
         try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
             for(String i : studentGrades.keySet()){
                 writer.print(i + " " + studentGrades.get(i) + "\n");
