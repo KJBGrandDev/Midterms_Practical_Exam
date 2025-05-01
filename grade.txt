@@ -1,5 +1,5 @@
-Bob 90
 Alice 85
+Bob 90
 Charlie 75
 
 Average 83.33

@@ -3,7 +3,7 @@ package FirstYr_SecondSem_Midterm_PracticalExam;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -15,7 +15,7 @@ public class Main {
     }
 
     public static double calculateAverageGrade(String fileName){
-        HashMap<String,Integer> studentGrades = new HashMap<>();
+        LinkedHashMap<String,Integer> studentGrades = new LinkedHashMap<>();
         File file = new File(fileName);
         double avgGrade = 0;
 
@@ -24,14 +24,12 @@ public class Main {
                 String nextLine = avgGradeScanner.nextLine();
                 String[] studentGradesArray = nextLine.split(" ");
 
-                if(!studentGradesArray[0].equals("Average")){
+                if(!studentGradesArray[0].equals("Average") && studentGradesArray.length == 2){
                     int gradeIntegerConversion = Integer.parseInt(studentGradesArray[1]);
                     studentGrades.put(studentGradesArray[0],gradeIntegerConversion);
-                } else {
-                    FileWriter writer = new FileWriter(fileName,true);
-                    writer.write("");
                 }
             }
+
         }catch(Exception e){
             System.out.println("Error: " +  e);
         }
@@ -50,14 +48,15 @@ public class Main {
     }
 
     public static void printStudentGrades(String fileName){
-        HashMap<String,Integer> studentGrades = new HashMap<>();
+        LinkedHashMap<String,Integer> studentGrades = new LinkedHashMap<>();
         File file = new File(fileName);
 
         try(Scanner scanStudentGrades = new Scanner(file)){
             while(scanStudentGrades.hasNextLine()){
                 String nextLine = scanStudentGrades.nextLine();
                 String[] studentGradesArray = nextLine.split(" ");
-                if(!studentGradesArray[0].equals("Average")){
+
+                if(!studentGradesArray[0].equals("Average") && studentGradesArray.length == 2){
                     int gradesConvertStringToInt = Integer.parseInt(studentGradesArray[1]);
                     studentGrades.put(studentGradesArray[0],gradesConvertStringToInt);
                 }
