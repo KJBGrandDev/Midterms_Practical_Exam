@@ -65,6 +65,7 @@ public class Main {
         } catch(Exception e){
             System.out.println("Error: " + e);
         }
+
         try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
             for(String i : studentGrades.keySet()){
                 writer.print(i + " " + studentGrades.get(i) + "\n");
@@ -72,6 +73,7 @@ public class Main {
         } catch (Exception e){
             System.out.println("Error: " + e);
         }
+
         System.out.println("Student Grades: ");
         for(String i : studentGrades.keySet()){
             System.out.println(i + ": " + studentGrades.get(i));
