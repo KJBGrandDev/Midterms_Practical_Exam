@@ -1,3 +1,8 @@
-Alice 85
 Bob 90
+Meow 100
+Alice 85
 Charlie 75
+Mojenggo 30
+Alistar 50
+
+Average 71.67

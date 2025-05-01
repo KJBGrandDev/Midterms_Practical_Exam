@@ -1,6 +1,8 @@
 package FirstYr_SecondSem_Midterm_PracticalExam;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,7 +11,7 @@ public class Main {
         String fileName = "grade.txt";
 
         printStudentGrades(fileName);
-        System.out.printf("Average Grade: %.2f",calculateAverageGrade(fileName));
+        System.out.printf("\nAverage Grade: %.2f",calculateAverageGrade(fileName));
     }
 
     public static double calculateAverageGrade(String fileName){
@@ -22,15 +24,28 @@ public class Main {
                 String nextLine = avgGradeScanner.nextLine();
                 String[] studentGradesArray = nextLine.split(" ");
 
-                int gradeIntegerConversion = Integer.parseInt(studentGradesArray[1]);
-                studentGrades.put(studentGradesArray[0],gradeIntegerConversion);
+                if(!studentGradesArray[0].equals("Average")){
+                    int gradeIntegerConversion = Integer.parseInt(studentGradesArray[1]);
+                    studentGrades.put(studentGradesArray[0],gradeIntegerConversion);
+                } else {
+                    FileWriter writer = new FileWriter(fileName,true);
+                    writer.write("");
+                }
             }
         }catch(Exception e){
             System.out.println("Error: " +  e);
         }
+
         for(int i: studentGrades.values()){
             avgGrade += i;
         }
+
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName,true))){
+            writer.printf("\nAverage %.2f",(avgGrade/studentGrades.size()));
+        } catch (Exception e){
+            System.out.println("Error: " + e);
+        }
+
         return avgGrade / studentGrades.size();
     }
 
@@ -42,10 +57,19 @@ public class Main {
             while(scanStudentGrades.hasNextLine()){
                 String nextLine = scanStudentGrades.nextLine();
                 String[] studentGradesArray = nextLine.split(" ");
-                int gradesConvertStringToInt = Integer.parseInt(studentGradesArray[1]);
-                studentGrades.put(studentGradesArray[0],gradesConvertStringToInt);
+                if(!studentGradesArray[0].equals("Average")){
+                    int gradesConvertStringToInt = Integer.parseInt(studentGradesArray[1]);
+                    studentGrades.put(studentGradesArray[0],gradesConvertStringToInt);
+                }
             }
         } catch(Exception e){
+            System.out.println("Error: " + e);
+        }
+        try(PrintWriter writer = new PrintWriter(new FileWriter(fileName))){
+            for(String i : studentGrades.keySet()){
+                writer.print(i + " " + studentGrades.get(i) + "\n");
+            }
+        } catch (Exception e){
             System.out.println("Error: " + e);
         }
         System.out.println("Student Grades: ");
